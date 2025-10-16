@@ -1,5 +1,6 @@
 // Load environment variables from .env file (must be first import)
 import 'dotenv/config'
+import path from "path"
 // Import Express framework for creating web server
 import express, { Express, Request, Response } from "express"
 // Import MongoDB client for database connection
@@ -74,6 +75,17 @@ async function startServer() {
         res.status(500).json({ error: 'Internal server error' })
       }
     })
+
+
+app.use(express.static(path.join(__dirname, "../client/build")))
+
+// Serve index.html for any other route (so React handles routing)
+app.get("*", (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"))
+})
+
+
+
 
     // Get port from environment variable or default to 8000
     const PORT = process.env.PORT || 8000
