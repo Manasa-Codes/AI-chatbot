@@ -5,7 +5,7 @@
     "scripts": {
         "dev": "npx ts-node index.ts",
         "seed": "npx ts-node seed-database.ts",
-        "build": "tsc && cd client && npm install && npm run build",
+         "build": "node --max-old-space-size=4096 node_modules/typescript/bin/tsc && cd client && npm install && node --max-old-space-size=4096 node_modules/react-scripts/scripts/build.js",
         "start": "node dist/index.js"
     },
     "keywords": [],
